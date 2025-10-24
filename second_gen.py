@@ -221,36 +221,9 @@ def generate_html(text, text_type, path=None):
     prettified_html = soup.prettify()
     return prettified_html
 
-
-# text = "משימה 2 - dictionary"
-# text_type = "question_title"
-# output = generate_html_with_bs(text, text_type)
-# print(output)
-
-raw_input = """
-<div dir="rtl">
-<font color="#6400E4" size="5"><b>
- טעינת הספריות
-</b></font>
-
-# היום נעסוק בנושא מרתק ונעבוד עם נתונים מהעולם האמיתי. לפני שנתחיל עלינו להבין מה מכילים הנתונים. תחילה נחקור את הנתונים/המדדים רפואיים של נשים בריאות ושל חולי סכרת שמופעים בטבלה.
-
-
-
-<h3 dir="rtl">
-
-**בשלב ראשון** אנא העלו את הקובץ מהדרייב לתוך טבלה של פנדס על מנת לחקור אותו</h3>
-הלינק לקובץ:
-https://drive.google.com/file/d/1CbzhuBJZue_pJbrZMTFT7T0Ok9tFpvmC/view?usp=sharing
-
-
-</div>
-"""
-
+raw_input = """place holder"""
 design_info = extract_design_attributes2(raw_input)
-# print(design_info)
-# print(design_info[0]['tag'])
-# print(design_info[0]['attributes'])
+
 print(design_info[0]['text'])
 raw_input = design_info[0]['text']
 output = clean_markdown_cell(raw_input)
@@ -258,11 +231,3 @@ print(output)
 print(generate_html_with_bs(output,text_type='question_text'))
 # soup = BeautifulSoup(design_info, 'html.parser')
 # print(soup.prettify())
-
-# text = "חלק 1 - מבני נתונים ב-Python"
-# text_type = "section_title"
-# output = generate_html(text, text_type)
-# text2 = "ענו כאן מה דעתכם?"
-# text_type2 = "question_text"
-# print(output)
-# print(generate_html(text2, text_type2))
