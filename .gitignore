@@ -1,2 +1,4 @@
 sandbox.py
 .idea
+.env
+config.py
