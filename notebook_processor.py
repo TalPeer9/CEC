@@ -71,7 +71,7 @@ def start_extraction(notebook_path, file_title="clean_"):
     if notebook_type == 'class_assigment':
         notebook_type = 'תרגול כיתה'
     elif notebook_type == 'home_assigment':
-        notebook_type = 'מטלת בית'
+        notebook_type = 'תרגול בית'
     notebook_header = f"{notebook_title} - {notebook_type}"
     rows_clean_text.append({
         'cell_id': 1,

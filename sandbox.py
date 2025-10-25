@@ -6,13 +6,12 @@ import markdown
 
 
 def generate_notebook(input_file):
-    # Read CSV data into pandas DataFrame
+
     df = pd.read_csv(input_file)
 
-    # Convert DataFrame to a list of dictionaries (one per row)
     notebook_content = df.to_dict(orient='records')
     print(notebook_content)
-    # Define your HTML template path
+
     with open('htmls/hw_notebook.html', 'r', encoding='utf-8') as file:
         html_template = file.read()
 
@@ -231,4 +230,3 @@ print(output)
 print(generate_html_with_bs(output,text_type='question_text'))
 # soup = BeautifulSoup(design_info, 'html.parser')
 # print(soup.prettify())
-# check

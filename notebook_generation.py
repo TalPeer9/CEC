@@ -1,10 +1,8 @@
 import pandas as pd
 import nbformat as nbf
-import os
 import inspect
 import importlib.util
 
-import llm_rephrasing
 import notebook_processor
 from notebook_processor import *
 
@@ -65,9 +63,6 @@ def extract_function_body(module_path, function_name):
     return ''.join(line for line in source_lines[1:] if line.strip())
 
 
-def repharse_openai():
-    pass
-
 
 def generate_notebook(input_file, output_notebook, rephrase_with_llm=False):
     """
@@ -115,11 +110,12 @@ def generate_notebook(input_file, output_notebook, rephrase_with_llm=False):
 
 
 if __name__ == "__main__":
-    notebook_type = "class_assigment"
-    number = 17
+    hw = False
+    notebook_type = "home_assigment" if hw else "class_assignment"
+    number = 22
     file_title = f"{notebook_type}_{number}"
     old_notebook = f"old_notebooks/{file_title}.ipynb"
     file_to_extract = notebook_processor.start_extraction(notebook_path=old_notebook, file_title=file_title)
     input_file = f"extracted_cells/{file_title}_cells.csv"
-    output_notebook = f"{file_title}_repharsed.ipynb"
-    generate_notebook(input_file=input_file, output_notebook=output_notebook)
+    output_notebook = f"{file_title}_rephrased.ipynb"
+    #generate_notebook(input_file=input_file, output_notebook=output_notebook)
