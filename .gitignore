@@ -2,3 +2,6 @@ sandbox.py
 .idea
 .env
 config.py
+extracted_cells
+new_notebooks
+old_notebooks
