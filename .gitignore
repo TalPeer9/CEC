@@ -1,8 +1,10 @@
-archive/sandbox.py
-.idea
+.idea/
+
 .env
 config.py
-extracted_cells
-new_notebooks
-old_notebooks
-archive
+
+extracted_cells/
+new_notebooks/
+old_notebooks/
+archive/
+
