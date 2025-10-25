@@ -3,6 +3,6 @@ archive/sandbox.py
 .env
 config.py
 extracted_cells
-new_notebooks/
-old_notebooks/
-archive/
+new_notebooks
+old_notebooks
+archive
