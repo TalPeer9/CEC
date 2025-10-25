@@ -66,7 +66,7 @@ def generate_notebook(input_file, output_notebook):
     elif input_file.endswith(".xlsx"):
         df = pd.read_excel(input_file)
     else:
-        raise ValueError("Unsupported file format. Use CSV or Excel.")
+        raise ValueError("Unsupported file format --> CSV / Excel only.")
 
     required_columns = ['Element_Type', 'Serial_Number', 'Raw_Content', 'Cell_Type', 'Header_Level', 'Anchor_ID']
     if not all(col in df.columns for col in required_columns):
@@ -78,9 +78,9 @@ def generate_notebook(input_file, output_notebook):
 
     for _, row in df.iterrows():
         element_type, serial_number, raw_content, cell_type, header_level = extract_row(row)
-        print(f"{element_type}: {serial_number}")
-        print(f"{header_level}: {header_level}")
-        print(f"{cell_type}: {cell_type}")
+
+        if cell_type == 'ignore':
+            continue
 
         if cell_type == 'code':
             final_code = DEFAULT_CODE_TEMPLATE if not raw_content else raw_content
@@ -210,7 +210,6 @@ def generate_notebook(input_file, output_notebook):
         else:
             raise ValueError(f"Unsupported Cell_Type: {cell_type} for Element_Type: {element_type}")
 
-
     notebook.cells.append(nbf.v4.new_markdown_cell(END_CELL))
 
     with open(output_notebook, 'w', encoding='utf-8') as f:
@@ -220,8 +219,16 @@ def generate_notebook(input_file, output_notebook):
 
 
 if __name__ == "__main__":
-    input_file = "extracted_cells/home_assignment_7_cells2.xlsx"
-    output_notebook = "new_notebooks/home_72.ipynb"
-    generate_notebook(input_file, output_notebook)
+    week_number = 7
+    hw = True
+    csv_format = False
 
-    print(f"Notebook path: {output_notebook} updated successfully.")
+    notebook_type = "home_assignment" if hw else "class_assignment"
+    file_format = "csv" if csv_format else "xlsx"
+    file_name = f"{notebook_type}_{week_number}"
+    extraction_file_name = f"{file_name}_cells.{file_format}"
+    input_path = f"extracted_cells/{extraction_file_name}"
+
+    output_path = f"new_notebooks/{file_name}.ipynb"
+
+    generate_notebook(input_path, output_path)
