@@ -48,7 +48,6 @@ END_CELL = ("<div dir='rtl' align='center'>\n\n"
 def extract_row(row):
     element_type = str(row['Element_Type']).strip()
 
-    # Ensure Serial_Number is treated as a string, handling potential float/int conversion
     serial_number = str(int(row['Serial_Number'])).strip() if pd.notna(row['Serial_Number']) else ""
     raw_content = str(row['Raw_Content']).strip() if pd.notna(row['Raw_Content']) else ""
     cell_type = str(row['Cell_Type']).lower().strip()
@@ -99,9 +98,10 @@ def generate_notebook(input_file, output_notebook):
                 color = colors[element_key]
                 text_size = font_sizes[element_key]
 
-                markdown_content = f"""<div dir='rtl' align='center'><font color='{color}' size='{text_size}'>
-                <b> {raw_content} </b>
-                </font></div>"""
+                markdown_content = f"""<div dir='rtl' align='center'>
+                                <font color='{color}' size='{text_size}'>
+                                <b> {raw_content} </b>
+                                </font></div>"""
 
             elif element_type == 'SECTION_TITLE':
 
@@ -109,15 +109,14 @@ def generate_notebook(input_file, output_notebook):
                 color = colors[element_key]
                 text_size = font_sizes[element_key]
 
-                # Desired format: " חלק <SECTION_NUMBER> - <SECTION_TITLE>"
                 title = f"חלק {int(serial_number)} - {raw_content}"
                 markdown_content = (f"<div dir='rtl' align='center'>"
-                                    f"<hr color='#7E30E1' style='border: 1px solid #7E30E1'>"
-                                    f"<hr color='#7E30E1' style='border: 1px solid #7E30E1'>"
-                                    f"<font color='#7E30E1' size='6'>"
+                                    f"<hr color='{color}' style='border: 1px solid {color}'>"
+                                    f"<hr color='{color}' style='border: 1px solid {color}'>"
+                                    f"<font color='{color}' size={text_size}>"
                                     f"<b>{title}</b> </font>"
-                                    f"<hr color='#7E30E1' style='border: 1px solid #7E30E1'>"
-                                    f"<hr color='#7E30E1' style='border: 1px solid #7E30E1'>"
+                                    f"<hr color='{color}' style='border: 1px solid {color}'>"
+                                    f"<hr color='{color}' style='border: 1px solid {color}'>"
                                     f"</div>")
 
             elif element_type == 'SECTION_TEXT':
@@ -213,6 +212,7 @@ def generate_notebook(input_file, output_notebook):
 
 
     notebook.cells.append(nbf.v4.new_markdown_cell(END_CELL))
+
     with open(output_notebook, 'w', encoding='utf-8') as f:
         nbf.write(notebook, f)
 
@@ -220,8 +220,8 @@ def generate_notebook(input_file, output_notebook):
 
 
 if __name__ == "__main__":
-    input_file_example = "extracted_cells/home_assignment_7_cells2.xlsx"
-    output_notebook_example = "new_notebooks/home_72.ipynb"
-    generate_notebook(input_file_example, output_notebook_example)
+    input_file = "extracted_cells/home_assignment_7_cells2.xlsx"
+    output_notebook = "new_notebooks/home_72.ipynb"
+    generate_notebook(input_file, output_notebook)
 
-    print("Code updated successfully.")
+    print(f"Notebook path: {output_notebook} updated successfully.")
